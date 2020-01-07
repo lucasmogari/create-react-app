@@ -127,7 +127,9 @@ module.exports = function(webpackEnv) {
           ident: 'postcss',
           plugins: () => [
             require('postcss-import'),
-            require('tailwindcss'),
+            process.env.TAILWIND_CONFIG
+              ? require('tailwindcss')(process.env.TAILWIND_CONFIG)
+              : require('tailwindcss'),
             require('postcss-flexbugs-fixes'),
             require('postcss-preset-env')({
               autoprefixer: {
